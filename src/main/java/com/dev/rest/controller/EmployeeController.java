@@ -25,7 +25,7 @@ public class EmployeeController {
 	Map<Integer, Employee> empData = new HashMap<Integer, Employee>();
 	
 	@RequestMapping(value = "/rest/emp/dummy", method = RequestMethod.GET)
-	public @ResponseBody Employee getDummyEmployee() {
+	public Employee getDummyEmployee() {
 		Employee emp = new Employee();
 		emp.setId(9999);
 		emp.setName("Dummy");
@@ -35,12 +35,12 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(value = "/rest/emp/{id}", method = RequestMethod.GET)
-	public @ResponseBody Employee getEmployee(@PathVariable("id") int empId) {
+	public Employee getEmployee(@PathVariable("id") int empId) {
 		return empData.get(empId);
 	}
 	
 	@RequestMapping(value = "/rest/emps", method = RequestMethod.GET)
-	public @ResponseBody List<Employee> getAllEmployees() {
+	public List<Employee> getAllEmployees() {
 		List<Employee> emps = new ArrayList<Employee>();
 		Set<Integer> empIdKeys = empData.keySet();
 		for(Integer i : empIdKeys){
@@ -50,13 +50,13 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(value = "/rest/emp/create", method = RequestMethod.POST)
-	public @ResponseBody Employee createEmployee(@RequestBody Employee emp) {
+	public Employee createEmployee(@RequestBody Employee emp) {
 		empData.put(emp.getId(), emp);
 		return emp;
 	}
 	
 	@RequestMapping(value = "/rest/emp/delete/{id}", method = RequestMethod.PUT)
-	public @ResponseBody Employee deleteEmployee(@PathVariable("id") int empId) {
+	public Employee deleteEmployee(@PathVariable("id") int empId) {
 		Employee emp = empData.get(empId);
 		empData.remove(empId);
 		return emp;
